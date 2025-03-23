@@ -56,38 +56,27 @@ Program ini menggunakan **Java Swing** dan **JDBC (Java Database Connectivity)**
 ### 1. Validasi NIM Unik Saat Insert
 Sebelum menambahkan data, program akan melakukan pengecekan apakah NIM sudah ada di database:
 ```java
-public boolean isNimExists(String nim) {
-    String query = "SELECT COUNT(*) FROM mahasiswa WHERE nim = '" + nim + "'";
-    try {
-        ResultSet rs = database.selectQuery(query);
-        if (rs.next() && rs.getInt(1) > 0) {
-            return true; // NIM sudah ada
+        // Cek apakah NIM sudah ada di database
+        ResultSet rs = database.selectQuery("SELECT * FROM mahasiswa WHERE nim='" + nim + "'");
+        try {
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "NIM sudah terdaftar!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return false;
-}
 ```
 
 ### 2. Validasi Kolom Kosong
-Sebelum menyimpan atau memperbarui data, program akan memeriksa apakah ada kolom kosong:
+Sebelum menyimpan atau memperbarui data, program akan memeriksa apakah ada kolom kosong. Jika ada kolom yang kosong, tampilkan pesan error:
 ```java
-public boolean isFormValid() {
-    return !nimField.getText().isEmpty() &&
-           !namaField.getText().isEmpty() &&
-           jenisKelaminComboBox.getSelectedItem() != null &&
-           waldosComboBox.getSelectedItem() != null;
-}
+        if (nim.isEmpty() || nama.isEmpty() || jenisKelamin.isEmpty() || waldos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Semua kolom harus diisi!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 ```
 
-Jika ada kolom yang kosong, tampilkan pesan error:
-```java
-if (!isFormValid()) {
-    JOptionPane.showMessageDialog(null, "Semua kolom harus diisi!", "Error", JOptionPane.ERROR_MESSAGE);
-    return;
-}
-```
 
 ## Kesimpulan
 Aplikasi ini memungkinkan pengguna untuk mengelola data mahasiswa dengan penyimpanan langsung ke database MySQL. Dengan fitur validasi tambahan, pengguna tidak dapat memasukkan NIM yang sudah ada atau menyimpan data dengan kolom kosong. Program ini mempermudah pengelolaan data mahasiswa dengan tampilan berbasis GUI yang intuitif.
