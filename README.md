@@ -94,5 +94,9 @@ Aplikasi ini memungkinkan pengguna untuk mengelola data mahasiswa dengan penyimp
 
 ---
 **Screenshot Tampilan Program:**
-![image](https://github.com/user-attachments/assets/ce59deb3-01ae-48d0-b823-567cf4dd13a1)
+![dialog error input nim terdaftar](https://github.com/user-attachments/assets/639f5d44-a530-409c-9954-c7e3bf6cd1bd)
+![dialog error input kosong](https://github.com/user-attachments/assets/7a8cb4c4-1e4e-415c-99b0-4fe93c896ac5)
+![update](https://github.com/user-attachments/assets/83ac7dcb-82a4-4436-bb86-b5c32e5cc333)
+![insert](https://github.com/user-attachments/assets/5306e652-cf1a-4bab-84f2-c97bf3ff3dd4)
+
 
